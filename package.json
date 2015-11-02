@@ -5,19 +5,17 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate.git"
+    "url": "https://github.com/robhogfeldt-fron15/reactiveDogs.git"
   },
   "keywords": [
     "express",
     "webpack",
     "node"
   ],
-  "author": "Christian Alfoni",
+  "author": "Robert Högfeldt",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate/issues"
-  },
-  "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
+
+  "homepage": "https://github.com/robhogfeldt-fron15/reactiveDogs.git",
   "scripts": {
     "test": "",
     "start": "babel-node server",
@@ -26,8 +24,16 @@
     "jscs": "jscs ."
   },
   "dependencies": {
-    "react": "0.14.0-rc1 ",
-    "react-dom": "0.14.0-rc1"
+    "body-parser": "^1.14.1",
+    "file-loader": "^0.8.4",
+    "moment": "^2.10.6",
+    "mongoose": "^4.1.9",
+    "react": "0.13.3",
+    "react-day-picker": "^1.0.10",
+    "react-flipcard": "^0.1.2",
+    "simple-react-modal": "^0.4.7",
+    "superagent": "^1.4.0",
+    "url-loader": "^0.5.6"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
@@ -49,7 +55,6 @@
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",
     "postcss-loader": "^0.6.0",
-    "react-addons-test-utils": "0.14.0-rc1",
     "react-transform-hmr": "^1.0.0",
     "rimraf": "^2.4.3",
     "sinon": "^1.16.1",
