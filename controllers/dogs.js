@@ -2,14 +2,13 @@
 let Dog = require('../models/dog');
 
 exports.postDogs = function(req, res) {
-  console.log(req.body.image);
+
   let dog = new Dog();
   dog.name = req.body.name;
   dog.merits = req.body.merits;
   dog.image = req.body.image;
 
-
-
+  console.log(dog);
 
   dog.save(function(err) {
     if (err)
