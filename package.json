@@ -18,7 +18,7 @@
   "homepage": "https://github.com/robhogfeldt-fron15/reactiveDogs.git",
   "scripts": {
     "test": "",
-    "start": "babel-node server",
+    "start": "node server",
     "postinstall": "node deploy",
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "eslint": "eslint .",
