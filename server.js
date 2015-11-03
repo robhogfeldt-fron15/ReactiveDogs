@@ -5,12 +5,12 @@ import bodyParser from 'body-parser';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
-let eventController = require('./controllers/events');
-let dogController = require('./controllers/dogs');
-let myEventController = require('./controllers/myevents');
+const eventController = require('./controllers/events');
+const dogController = require('./controllers/dogs');
+const myEventController = require('./controllers/myevents');
 
 
-let assestsPath = path.resolve(__dirname, 'assets');
+const assestsPath = path.resolve(__dirname, 'assets');
 
 
 
@@ -19,7 +19,7 @@ let assestsPath = path.resolve(__dirname, 'assets');
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
-let router = express.Router();
+const router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,10 +48,16 @@ if (isDeveloping) {
 }
 
 
-let mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost/reactdb');
+const mongoose   = require('mongoose');
 
-router.get('/', function (req, res) {
+// mongoose.connect('mongodb://localhost/reactdb');
+const uri = 'mongodb://mongobob:bobmongo@ds049744.mongolab.com:49744/reactivcedb';
+mongoose.connect(uri, function(error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
+
+router.get('/', function(req, res) {
   res.json({ message: 'yay!' });
 });
 
