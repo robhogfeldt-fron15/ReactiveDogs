@@ -1,4 +1,4 @@
- import path from 'path';
+import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
 import bodyParser from 'body-parser';
@@ -49,7 +49,7 @@ if (isDeveloping) {
 
 
 let mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost/reactdb'); 
+mongoose.connect('mongodb://localhost/reactdb');
 
 router.get('/', function (req, res) {
   res.json({ message: 'yay!' });
