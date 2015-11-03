@@ -97,7 +97,7 @@ router.route('/events/:event_id')
 
 app.use('/api', router);
 
-app.listen(port, 'localhost', function onStart(err) {
+app.listen(process.env.PORT, 'localhost', function onStart(err) {
   if (err) {
     console.log(err);
   }
