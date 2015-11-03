@@ -5,9 +5,6 @@ import AddEvent from './events/addEvent.js';
 import Events from './events/event.js';
 
 
-
-
-
 class MyEvents extends React.Component {
 
   constructor(props) {
