@@ -47,6 +47,7 @@
     "mocha-jsdom": "^1.0.0",
     "moment": "^2.10.6",
     "mongoose": "^4.1.9",
+    "node-sass": "^3.4.1",
     "postcss-loader": "^0.6.0",
     "react": "0.13.3",
     "react-day-picker": "^1.0.10",
