@@ -1,11 +1,10 @@
 
-let MyEvent = require('../models/myEvent');
+const MyEvent = require('../models/myEvent');
 
 
 exports.postmyEvents = function(req, res) {
-
   console.log(req.body);
-  let myEvent = new MyEvent();
+  const myEvent = new MyEvent();
   myEvent.name = req.body.name;
   myEvent.location = req.body.location;
   myEvent.date = req.body.date;
@@ -44,24 +43,23 @@ exports.getmyEvent = function(req, res) {
 
 
 exports.putmyEvent = function(req, res) {
-
-
-
   MyEvent.findById(req.params.myevent_id, function(err, myEvent) {
     if (err)
       res.send(err);
-
-
       let selectedDog;
 
-      myEvent.dogs.forEach( function( dog ){
-        if ( String(dog._id) === req.body.dogId ){
-          selectedDog = dog;
-        }
-      } );
-
-    selectedDog.results = req.body.result;
-    console.log(req.body.result);
+      if (!req.body.result) {
+        console.log('add to event');
+        myEvent.dogs.push(req.body.addDogId);
+      } else {
+        myEvent.dogs.forEach( function( dog ) {
+          if ( String(dog._id) === req.body.dogId ) {
+            selectedDog = dog;
+          }
+        });
+      selectedDog.results = req.body.result;
+      console.log(req.body.result);
+      }
 
     myEvent.save(function(errs) {
       if (err)

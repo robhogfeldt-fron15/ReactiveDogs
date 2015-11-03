@@ -45,6 +45,9 @@ handleDelete(i) {
 
 updateNewDog(dog) {
 const self = this;
+if (!dog.image) {
+  dog.image = 'http://image.spreadshirtmedia.com/image-server/v1/designs/12337518,width=200,height=200';
+}
 request
    .post('api/dogs')
    .send(dog)
