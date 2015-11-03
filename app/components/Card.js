@@ -1,18 +1,17 @@
 import React from 'react';
 
 
-class Card extends React.Component{
+class Card extends React.Component {
 
-  constructor(props){
+  constructor(props) {
    super(props);
-
-
   }
-
+  handleDogToEdit() {
+    alert('EditDog not yet implemented...sorry =)')
+  }
   render() {
-
-    let meritList = this.props.dogs.merits.map(function(merit, i){
-     return <li key= {i}>{merit}</li>;
+  const meritList = this.props.dogs.merits.map(function(merit, i) {
+  return <li key= {i}>{merit}</li>;
    });
 
     return (
@@ -28,8 +27,8 @@ class Card extends React.Component{
                      {meritList}
                    </ul>
                  </div>
-                   <ul onClick={this.props.handleDogToEdit.bind(this, this.props.dogs)}>
-                       <li ><a><i className="fa fa-pencil-square-o"></i></a></li>
+                   <ul onClick={this.handleDogToEdit.bind(this, this.props.dogs)}>
+                       <li><a><i className="fa fa-pencil-square-o"></i></a></li>
                    </ul>
                </div>
          </div>

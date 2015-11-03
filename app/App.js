@@ -2,10 +2,7 @@ import React from 'react';
 import Events from './components/events/event.js';
 import Dogs from './components/dogs/dogs.js';
 import ChoosenEvent from './components/events/choosenEvent.js';
-
-
 import request from 'superagent';
-
 
 
 export default class App extends React.Component {
@@ -24,15 +21,13 @@ export default class App extends React.Component {
                   newEvent: {},
                   errors: {}
                 };
-
-
-  }
+              }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
       request
          .get('api/myevents')
-         .end(function(err, res){
+         .end(function(err, res) {
           self.setState({
             events: res.body,
             choosenEvent: res.body[0]
@@ -40,102 +35,100 @@ export default class App extends React.Component {
          });
          request
             .get('api/dogs')
-            .end(function(err, res){
+            .end(function(err, res) {
              self.setState({dogs: res.body});
             });
-
-
-  }
+          }
 
   handleChange(num) {
-
      this.setState({
        choosenEvent: this.state.events[num]
      });
    }
 
-   eventFormIsValid(){
+   eventFormIsValid() {
      let isValid = true;
      this.state.errors = {};
-
-     if (this.state.newEvent.name.length < 3){
+     if (this.state.newEvent.name.length < 3) {
          this.state.errors.name = 'at least 3 chars..';
          isValid = false;
      }
       this.setState({errors: this.state.errors});
       return isValid;
    }
-   handleEventSubmit(event){
+
+   handleEventSubmit(event) {
     event.preventDefault();
-     if (!this.eventFormIsValid()){
+     if (!this.eventFormIsValid()) {
        return;
      }
        request
           .post('api/events')
           .send(this.state.newEvent)
-          .end(function(err, res){
-            alert(res.body);
+          .end(function(err, res) {
            self.setState({events: res.body});
           });
 
 
-  return;
-
+          return;
    }
 
-
-
-
-   setEventState(event){
-
-     let field = event.target.name;
-     let value = event.target.value;
+   setEventState(event) {
+     const field = event.target.name;
+     const value = event.target.value;
 
      this.state.newEvent[field] = value;
      return this.setState({newEvent: this.state.newEvent});
-
    }
 
-  deleteEvent(x){
+  deleteEvent(x) {
     request
       .del('api/myevents/' + x)
-      .end(function(err, res){
+      .end(function(err, res) {
        console.log(res);
    });
 }
 
+addDogToEvent(dog) {
+  const self = this;
+  request
+     .put('api/myevents/' + this.state.choosenEvent._id)
+     .send({
+      addDogId: dog})
+     .end(function(err, res) {
+      self.setState({choosenEvent: res.body});
+     });
+}
 
-updateChoosenEvent(event){
 
+updateChoosenEvent(event) {
 this.setState({
   choosenEvent: event
 });
 }
 
   render() {
-
     return (
-        <div className='container'>
-             <div className='col-sm-4'>
+        <div className="container">
+             <div className="col-sm-4">
               <div>
                   <Events handleEventClick={this.handleChange}
                            events={this.state.events}/>
               </div>
             </div>
 
-            <div className='col-sm-4'>
+            <div className="col-sm-4">
               <ChoosenEvent choosenEvent={this.state.choosenEvent}
                             deleteChoosenEvent={this.deleteEvent}
                             updateChoosenEvent={this.updateChoosenEvent}/>
             </div>
-      <div className='col-sm-4'>
-        <Dogs choosenEvent={this.state.choosenEvent}
-               dogs={this.state.dogs}/>
+            <div className="col-sm-4">
+               <Dogs choosenEvent={this.state.choosenEvent}
+                     addDogToEvent={this.addDogToEvent.bind(this)}
+                     dogs={this.state.dogs}/>
 
       </div>
     </div>
-
-
 
     );
   }

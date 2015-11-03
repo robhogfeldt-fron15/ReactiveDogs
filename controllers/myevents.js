@@ -11,11 +11,10 @@ exports.postmyEvents = function(req, res) {
   myEvent.dogs = [];
 
 
-
-
   myEvent.save(function(err) {
-    if (err)
+    if (err) {
       res.send(err);
+     }
 
     res.json({ message: 'myEvent added !', data: myEvent });
   });
@@ -24,8 +23,9 @@ exports.postmyEvents = function(req, res) {
 
 exports.getmyEvents = function(req, res) {
   MyEvent.find(function(err, events) {
-    if (err)
+    if (err) {
       res.send(err);
+     }
 
     res.json(events);
   });
@@ -34,8 +34,9 @@ exports.getmyEvents = function(req, res) {
 
 exports.getmyEvent = function(req, res) {
   MyEvent.findById(req.params.event_id, function(err, myEvent) {
-    if (err)
+    if (err) {
       res.send(err);
+     }
 
     res.json(myEvent);
   });
@@ -44,13 +45,20 @@ exports.getmyEvent = function(req, res) {
 
 exports.putmyEvent = function(req, res) {
   MyEvent.findById(req.params.myevent_id, function(err, myEvent) {
-    if (err)
+    if (err) {
       res.send(err);
+     }
       let selectedDog;
 
       if (!req.body.result) {
         console.log('add to event');
         myEvent.dogs.push(req.body.addDogId);
+        myEvent.save(function(errs) {
+          if (err) {
+            res.send(errs);
+           }
+          res.json(myEvent);
+        });
       } else {
         myEvent.dogs.forEach( function( dog ) {
           if ( String(dog._id) === req.body.dogId ) {
@@ -59,23 +67,22 @@ exports.putmyEvent = function(req, res) {
         });
       selectedDog.results = req.body.result;
       console.log(req.body.result);
+      myEvent.save(function(errs) {
+        if (err) {
+          res.send(errs);
+         }
+        res.json(selectedDog);
+      });
       }
-
-    myEvent.save(function(errs) {
-      if (err)
-        res.send(errs);
-
-      res.json(selectedDog);
-    });
   });
 };
 
 
 exports.deletemyEvent = function(req, res) {
   MyEvent.findByIdAndRemove(req.params.event_id, function(err) {
-    if (err)
+    if (err) {
       res.send(err);
-
+     }
     res.json({ message: 'delete!' });
   });
 };

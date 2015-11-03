@@ -9,14 +9,7 @@ class Dog extends React.Component {
     }
 
   handleDogClick(i) {
-    const self = this;
-    request
-       .put('api/myevents/' + this.props.choosenEvent._id)
-       .send({
-        addDogId: this.props.dogs[i]})
-       .end(function(err, res) {
-        self.setState({events: res.body});
-       });
+   this.props.addDogToEvent(this.props.dogs[i]);
   }
 
   render() {
@@ -44,5 +37,6 @@ class Dog extends React.Component {
 export default Dog;
 Dog.propTypes = {
  dogs: React.PropTypes.array,
+ addDogToEvent: React.PropTypes.func,
  choosenEvent: React.PropTypes.object
 };

@@ -1,14 +1,8 @@
 import React from 'react';
 
-
-
-
 class Home extends React.Component {
 
-
-
-  render() {
-
+render() {
     return (
       <div className="copyright">
             <div className="container">
@@ -26,7 +20,7 @@ class Home extends React.Component {
 
                       <h2>Ok, Good for her, what´s in it for me?</h2>
                       <p>Well, the code is available on github and it might contain something useful for you.</p>
-                      <p>In this demo, all calls to the db is replaced by a toaster message. So dont be afraid to click on anything that moves.</p>
+                      <p>Feel free to click around, changes you make will be saved in the db to the delight of the next visitor. If you decide to create a new dog, you might want to choose an image-size of 200 x 200...Have fun!</p>
 
                     </div>
 
@@ -39,11 +33,14 @@ class Home extends React.Component {
                         <li>Mongoose</li>
                         <li>MongoDb</li>
                         <li>Bootstrap</li>
-                        <li>The excellent <a href='http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup'>webpack boilerplate</a> by Christian Alfoni </li>
+                        <li>The excellent <a href="http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup">webpack boilerplate</a> by Christian Alfoni </li>
                        </ul>
-
-
                     </div>
+
+                    <div className="col-md-6">
+                      <a href="https://github.com/robhogfeldt-fron15/ReactiveDogs"><img className="gitImage" src="http://www.xgouchet.fr/images/fork_me_on_github.png" /></a>
+                    </div>
+
 
             </div>
         </div>
