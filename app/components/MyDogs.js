@@ -2,7 +2,7 @@ import React from 'react';
 import request from 'superagent';
 import Card from './Card.js';
 import AddDog from './dogs/addDog.js';
-import EditDog from './dogs/EditDog.js';
+import EditDog from './dogs/editDog.js';
 
 
 class MyDogs extends React.Component {
