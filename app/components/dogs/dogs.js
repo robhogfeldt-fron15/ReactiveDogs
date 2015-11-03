@@ -1,8 +1,6 @@
 import React from 'react';
 import request from 'superagent';
 
-
-
 class Dog extends React.Component {
 
   constructor(props) {
@@ -10,33 +8,22 @@ class Dog extends React.Component {
    this.handleDogClick = this.handleDogClick.bind(this);
     }
 
-  handleDogClick(i){
-    alert(this.props.dogs[i]._id);
-    let self = this;
-    request
-       .put('api/myevents/' + this.props.choosenEvent._id)
-       .send({
-        addDogId: this.props.dogs[i]})
-       .end(function(err, res){
-         alert(res.body);
-        self.setState({events: res.body});
-       });
+  handleDogClick(i) {
+   this.props.addDogToEvent(this.props.dogs[i]);
   }
 
   render() {
-
-    let self = this;
-    let eventList = this.props.dogs.map(function(dog, i){
+    const self = this;
+    const eventList = this.props.dogs.map(function(dog, i) {
       return <li key={i} onClick={self.handleDogClick.bind(self, i)}>{dog.name} </li>;
     });
     return (
       <div>
-        <div className='row flipInX animated'>
+        <div className="row flipInX animated">
           <div>
-
-            <div className='panel panel-default'>
-              <div className='panel-heading'>Add dog to event: {this.props.choosenEvent.name}</div>
-              <div className='panel-body'>
+            <div className="panel panel-default">
+              <div className="panel-heading">Add dog to event: {this.props.choosenEvent.name}</div>
+              <div className="panel-body">
                 {eventList}
               </div>
             </div>
@@ -50,5 +37,6 @@ class Dog extends React.Component {
 export default Dog;
 Dog.propTypes = {
  dogs: React.PropTypes.array,
+ addDogToEvent: React.PropTypes.func,
  choosenEvent: React.PropTypes.object
 };

@@ -19,51 +19,41 @@ class ResultInp extends React.Component{
 
  }
 
- componentWillMount(){
+ componentWillMount() {
    if (this.props.results) {
      this.setState({
           track: this.props.results.track,
           obedience: this.props.results.obedience,
           protection: this.props.results.protection
     });
-
    }
-
-
  }
 
- handleChange(name, e){
-  let change = {};
+ handleChange(name, e) {
+  const change = {};
   change[name] = e.target.value;
   this.setState(change);
-
  }
 
-handleClick(){
-
-let self = this;
+handleClick() {
+const self = this;
      request
         .put('api/myevents/' + this.props.choosenEvent._id)
         .send({
         result: this.state,
         dogId: this.props.dog._id
         })
-        .end(function(err, res){
-          alert(res.body.results);
+        .end(function(err, res) {
          self.setState(res.body.results);
         });
-
     }
-
-
-
 
   render() {
     return (
 
 
       <div>
-<div className='col-md-8'>
+        <div className='col-md-8'>
           <h3>{this.props.dog.name}</h3>
 
           <label className='control-label'>Spår</label>

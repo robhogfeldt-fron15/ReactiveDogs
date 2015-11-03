@@ -1,11 +1,8 @@
 import React from 'react';
 import request from 'superagent';
 import Result from './Result';
-import AddEvent from './events/AddEvent.js';
+import AddEvent from './events/addEvent.js';
 import Events from './events/event.js';
-
-
-
 
 
 class MyEvents extends React.Component {

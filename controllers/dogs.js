@@ -1,15 +1,18 @@
 
-let Dog = require('../models/dog');
+const Dog = require('../models/dog');
 
 exports.postDogs = function(req, res) {
-
-  let dog = new Dog();
+  console.log(req.body.image);
+  const dog = new Dog();
   dog.name = req.body.name;
   dog.merits = req.body.merits;
-  dog.image = req.body.image;
+  if (!req.body.image) {
+    dog.image =  'http://image.spreadshirtmedia.com/image-server/v1/designs/12337518,width=200,height=200';
+  } else {
+    dog.image = 'http://image.spreadshirtmedia.com/image-server/v1/designs/12337518,width=200,height=200';
+  }
 
   console.log(dog);
-
   dog.save(function(err) {
     if (err)
       res.send(err);
@@ -20,7 +23,6 @@ exports.postDogs = function(req, res) {
 
 
 exports.getDogs = function(req, res) {
-
   Dog.find(function(err, dogs) {
     if (err)
       res.send(err);

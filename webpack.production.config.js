@@ -45,8 +45,14 @@ module.exports = {
       test: /\.json?$/,
       loader: 'json'
     }, {
+     test: /\.scss$/,
+     loader: 'style!css!sass'
+   }, {
+     test: /\.svg$/,
+     loader: "url-loader?limit=100000&mimetype=image/svg+xml"
+   }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }]
   },
   postcss: [
