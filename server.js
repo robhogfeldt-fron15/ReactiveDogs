@@ -96,10 +96,10 @@ router.route('/events/:event_id')
 
 
 app.use('/api', router);
-
-app.listen(process.env.PORT, 'localhost', function onStart(err) {
-  if (err) {
-    console.log(err);
-  }
-  console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
-});
+app.listen(process.env.PORT || 3000);
+// app.listen(process.env.PORT, 'localhost', function onStart(err) {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
+// });
