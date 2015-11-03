@@ -3,6 +3,7 @@ import Events from './components/events/event.js';
 import Dogs from './components/dogs/dogs.js';
 import ChoosenEvent from './components/events/choosenEvent.js';
 import request from 'superagent';
+import Spinner from 'react-spinner';
 
 
 export default class App extends React.Component {
@@ -10,6 +11,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.updateChoosenEvent = this.updateChoosenEvent.bind(this);
+    this.removeDogFromEvent = this.removeDogFromEvent.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setEventState = this.setEventState.bind(this);
     this.handleEventSubmit = this.handleEventSubmit.bind(this);
@@ -89,13 +91,46 @@ export default class App extends React.Component {
    });
 }
 
-addDogToEvent(dog) {
+addDogToEvent(dogToAdd) {
+  alert('add ' + dogToAdd.name);
+ const self = this;
+    request
+       .put('api/myevents/' + this.state.choosenEvent._id)
+       .send({
+        addDogId: dogToAdd})
+       .end(function(err, res) {
+        self.setState({choosenEvent: res.body});
+       });
+}
+
+// addDogToEvent(dogToAdd) {
+//   alert('add ' + dogToAdd.name);
+//   // Check if dog is in event
+//   const self = this;
+//   this.state.choosenEvent.dogs.forEach( function( dog ) {
+//     if ( String(dog._id) === dogToAdd._id) {
+//     alert(dogToAdd.name + ' finns redan i event');
+//   } else {
+//     request
+//        .put('api/myevents/' + self.state.choosenEvent._id)
+//        .send({
+//         addDogId: dogToAdd})
+//        .end(function(err, res) {
+//         self.setState({choosenEvent: res.body});
+//        });
+//      }
+//   });
+// }
+
+removeDogFromEvent(dog) {
+  alert('remove ' + dog.name);
   const self = this;
   request
      .put('api/myevents/' + this.state.choosenEvent._id)
      .send({
-      addDogId: dog})
+      removeDogId: dog})
      .end(function(err, res) {
+      console.log(res.body);
       self.setState({choosenEvent: res.body});
      });
 }
@@ -118,8 +153,10 @@ this.setState({
             </div>
 
             <div className="col-sm-4">
+              <Spinner/>
               <ChoosenEvent choosenEvent={this.state.choosenEvent}
                             deleteChoosenEvent={this.deleteEvent}
+                            removeDogFromEvent={this.removeDogFromEvent}
                             updateChoosenEvent={this.updateChoosenEvent}/>
             </div>
             <div className="col-sm-4">
