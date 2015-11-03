@@ -15,20 +15,16 @@ class MyDogs extends React.Component {
                  dogs: [],
                  dogToEdit: {}
                };
-
-}
+             }
 
 
 componentDidMount() {
-  let self = this;
-
+  const self = this;
        request
           .get('api/dogs')
-          .end(function(err, res){
+          .end(function(err, res) {
            self.setState({dogs: res.body});
           });
-
-
 }
 
 handleDogToEdit(dog) {
@@ -39,19 +35,28 @@ console.log(dog);
 }
 
 handleDelete(i) {
-
   console.log(this.state.dogs[i]._id);
   request
   .del('api/dogs/' + this.state.dogs[i]._id)
-  .end(function(err, res){
+  .end(function(err, res) {
    console.log(res);
   });
 }
 
-  render() {
+updateNewDog(dog) {
+const self = this;
+request
+   .post('api/dogs')
+   .send(dog)
+   .end(function(err, res) {
+    self.setState({dogs: self.state.dogs.concat([dog])});
+    console.log(res);
+   });
+}
 
-      let self = this;
-      let eventList = this.state.dogs.map(function(dog, i){
+  render() {
+      const self = this;
+      const eventList = this.state.dogs.map(function(dog, i) {
       return <li key={i}> <Card dogs={dog} name={dog.name} handleDogToEdit={self.handleDogToEdit}/></li>;
     });
     return (
@@ -62,7 +67,7 @@ handleDelete(i) {
           </ul>
        </div>
        <div className="col-sm-4">
-         <AddDog newDog={this.state.newDog} />
+         <AddDog newDog={this.state.newDog} updateNewDog={this.updateNewDog.bind(this)} />
          <EditDog dog={this.state.dogToEdit} />
       </div>
     </div>

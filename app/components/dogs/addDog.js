@@ -21,15 +21,15 @@ class addDog extends React.Component {
                   }
 
 handleDogSubmit(){
-
-  console.log(this.state.newDog);
-  request
-     .post('api/dogs')
-     .send(this.state.newDog)
-     .end(function(err, res){
-       alert(res.body);
-      self.setState({events: res.body});
-     });
+this.props.updateNewDog(this.state.newDog);
+  // console.log(this.state.newDog);
+  // request
+  //    .post('api/dogs')
+  //    .send(this.state.newDog)
+  //    .end(function(err, res){
+  //     z
+  //     self.setState({events: res.body});
+  //    });
 
 }
 
@@ -102,5 +102,5 @@ export default addDog;
 addDog.propTypes = {
 
  newDog: React.PropTypes.object,
- handleDogSubmit: React.PropTypes.func
+ updateNewDog: React.PropTypes.func
 };
