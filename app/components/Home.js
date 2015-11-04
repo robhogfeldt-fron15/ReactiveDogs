@@ -41,7 +41,12 @@ render() {
                       <a href="https://github.com/robhogfeldt-fron15/ReactiveDogs"><img className="gitImage" src="http://www.xgouchet.fr/images/fork_me_on_github.png" /></a>
                     </div>
 
+                    <h2>Upcoming features</h2>
 
+                   <ul>
+                    <li>- OCR-codes containing the resultpage for quick and easy update on the field.</li>
+                    <li>- Stats with beautiful pie-charts and diagrams.</li>
+                   </ul>
             </div>
         </div>
     );

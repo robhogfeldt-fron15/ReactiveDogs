@@ -92,7 +92,6 @@ export default class App extends React.Component {
 }
 
 addDogToEvent(dogToAdd) {
-  alert('add ' + dogToAdd.name);
  const self = this;
     request
        .put('api/myevents/' + this.state.choosenEvent._id)
@@ -103,27 +102,7 @@ addDogToEvent(dogToAdd) {
        });
 }
 
-// addDogToEvent(dogToAdd) {
-//   alert('add ' + dogToAdd.name);
-//   // Check if dog is in event
-//   const self = this;
-//   this.state.choosenEvent.dogs.forEach( function( dog ) {
-//     if ( String(dog._id) === dogToAdd._id) {
-//     alert(dogToAdd.name + ' finns redan i event');
-//   } else {
-//     request
-//        .put('api/myevents/' + self.state.choosenEvent._id)
-//        .send({
-//         addDogId: dogToAdd})
-//        .end(function(err, res) {
-//         self.setState({choosenEvent: res.body});
-//        });
-//      }
-//   });
-// }
-
 removeDogFromEvent(dog) {
-  alert('remove ' + dog.name);
   const self = this;
   request
      .put('api/myevents/' + this.state.choosenEvent._id)

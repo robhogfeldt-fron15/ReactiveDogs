@@ -16,7 +16,6 @@ class ChoosenEvent extends React.Component {
   }
 
   handleClick(i) {
-    alert(this.props.choosenEvent.dogs[i]);
     const dog = this.props.choosenEvent.dogs[i];
     this.props.removeDogFromEvent(dog);
   }
