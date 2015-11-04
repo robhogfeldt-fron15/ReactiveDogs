@@ -9,7 +9,8 @@ class Dog extends React.Component {
     }
 
   handleDogClick(i) {
-   this.props.addDogToEvent(this.props.dogs[i]);
+   const dog = this.props.dogs[i];
+   this.props.addDogToEvent(dog);
   }
 
   render() {

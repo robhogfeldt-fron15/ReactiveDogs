@@ -50,16 +50,35 @@ exports.putmyEvent = function(req, res) {
      }
       let selectedDog;
 
-      if (!req.body.result) {
-        console.log('add to event');
-        myEvent.dogs.push(req.body.addDogId);
-        myEvent.save(function(errs) {
-          if (err) {
-            res.send(errs);
+
+      // Remove from event
+      if (req.body.removeDogId) {
+        console.log('remove dog from event');
+        MyEvent.findByIdAndUpdate(
+          req.params.myevent_id,
+          { $pull: { 'dogs': {  _id: req.body.removeDogId._id } } }, {new: true}, function(er, model) {
+          if (er) {
+          	console.log(err);
+          	return res.send(err);
            }
-          res.json(myEvent);
-        });
-      } else {
+           console.log(model);
+           return res.json(model);
+         });
+       } else if (req.body.addDogId) {
+           console.log('add dog to event');
+           MyEvent.findByIdAndUpdate(
+             req.params.myevent_id,
+             { $push: { 'dogs': req.body.addDogId  } }, {new: true}, function(er, model) {
+             if (er) {
+               console.log(err);
+               return res.send(err);
+              }
+              console.log(model);
+              return res.json(model);
+            });
+        // Add Results
+      } else if (req.body.result) {
+        console.log('add result');
         myEvent.dogs.forEach( function( dog ) {
           if ( String(dog._id) === req.body.dogId ) {
             selectedDog = dog;
@@ -73,10 +92,9 @@ exports.putmyEvent = function(req, res) {
          }
         res.json(selectedDog);
       });
-      }
-  });
+    }
+});
 };
-
 
 exports.deletemyEvent = function(req, res) {
   MyEvent.findByIdAndRemove(req.params.event_id, function(err) {

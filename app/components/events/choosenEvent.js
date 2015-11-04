@@ -11,46 +11,33 @@ class ChoosenEvent extends React.Component {
 
     }
 
-  componentWillMount(){
+  componentWillMount() {
    this.props.choosenEvent.dogs = [];
-
   }
 
   handleClick(i) {
-         let self = this;
-              request
-                 .put('api/myevents/' + this.props.choosenEvent._id)
-                 .send({
-                 removeDogId: this.props.choosenEvent.dogs[i]._id
-                 })
-                 .end(function(err, res){
-                   console.log(res.body);
-                   self.props.updateChoosenEvent(res.body);
-                 });
-              }
+    const dog = this.props.choosenEvent.dogs[i];
+    this.props.removeDogFromEvent(dog);
+  }
 
   render() {
-
-      let choosenStyle = {clear: 'both'};
-      let deleteButton = {fontSize: '0.8em', fontStyle: 'cursive'};
+      const choosenStyle = {clear: 'both'};
+      const deleteButton = {fontSize: '0.8em', fontStyle: 'cursive'};
       let dogsInEvent;
 
-      let self = this;
+      const self = this;
       if (this.props.choosenEvent.dogs.length === 0) {
-
       dogsInEvent =  <div className='col-md-12'>
                             <div>
                                 <h4>Add  a couple of dogs..</h4>
                                 <p>Add the dogs that will participate in {this.props.choosenEvent.name} from the list to your right</p>
                             </div>
                         </div>
-
-      }else {
+      } else {
         dogsInEvent = this.props.choosenEvent.dogs.map(function(item, i) {
-        return <li key={i} style={choosenStyle} onClick={self.handleClick.bind(self, i)}>
-
-          <h4 className='alignleft'>{item.name}</h4>
-          <h4 className='alignright' style={deleteButton}>Delete {item.name}</h4>
+        return <li key={i} style={choosenStyle}>
+          <h4 className="alignleft">{item.name}</h4>
+          <h4 className="alignright" style={deleteButton} onClick={self.handleClick.bind(self, i)}>Delete {item.name}</h4>
         </li>;
       });
 
@@ -81,7 +68,8 @@ class ChoosenEvent extends React.Component {
 ChoosenEvent.propTypes =  {
   choosenEvent: PropTypes.object,
   deleteChoosenEvent: PropTypes.func,
-  updateChoosenEvent: PropTypes.func
+  updateChoosenEvent: PropTypes.func,
+  removeDogFromEvent: PropTypes.func
 
 };
 export default ChoosenEvent;
